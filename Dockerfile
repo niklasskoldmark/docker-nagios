@@ -42,11 +42,13 @@ RUN apt-get update && \
         python-nagiosplugin \
         python3-nagiosplugin
 
+RUN htpasswd -bc /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
+
 #RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y fusiondirectory-plugin-nagios fusiondirectory-plugin-nagios-schema
 
 #RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y gosa gosa-plugin-nagios gosa-plugin-nagios-schema
 
-CMD /srv/setup.sh
+CMD /srv/cmd.sh
 
 #ENTRYPOINT ["/srv/entrypoint.sh"]
 
