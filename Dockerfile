@@ -20,7 +20,7 @@ RUN apt-get update && \
     postfix
 
 RUN cd /srv && \
-    curl -L "http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.0.4.tar.gz" |tar zxvf - && \
+    curl -L "http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.0.8.tar.gz" |tar zxvf - && \
     useradd nagios && \
     groupadd nagcmd && \
     usermod -a -G nagcmd nagios && \
@@ -43,7 +43,7 @@ RUN cd /srv && \
     a2enconf nagios.conf
 
 RUN cd /srv && \
-    curl -L "http://nagios-plugins.org/download/nagios-plugins-2.0.tar.gz" |tar zxvf - && \
+    curl -L "http://nagios-plugins.org/download/nagios-plugins-2.0.3.tar.gz" |tar zxvf - && \
     cd /srv/nagios-plugins-* && \
     ./configure --with-nagios-user=nagios --with-nagios-group=nagios && \
     make && \
