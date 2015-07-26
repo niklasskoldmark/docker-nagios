@@ -12,11 +12,11 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install \
     -y \
-        fusiondirectory-plugin-nagios \
-        fusiondirectory-plugin-nagios-schema \
+#        fusiondirectory-plugin-nagios \
+#        fusiondirectory-plugin-nagios-schema \
         ganglia-nagios-bridge \
-        gosa-plugin-nagios \
-        gosa-plugin-nagios-schema \
+#        gosa-plugin-nagios \
+#        gosa-plugin-nagios-schema \
         libnagios-object-perl \
         libnagios-plugin-perl \
         nagios-images \
@@ -41,6 +41,10 @@ RUN apt-get update && \
         postfix \
         python-nagiosplugin \
         python3-nagiosplugin
+
+#RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y fusiondirectory-plugin-nagios fusiondirectory-plugin-nagios-schema
+
+#RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y gosa gosa-plugin-nagios gosa-plugin-nagios-schema
 
 CMD /srv/setup.sh
 
