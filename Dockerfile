@@ -2,12 +2,6 @@ FROM debian:8.1
 
 MAINTAINER Niklas Skoldmark <niklas.skoldmark@gmail.com>
 
-COPY ["setup.sh", "/srv/setup.sh"]
-
-COPY ["cmd.sh", "/srv/cmd.sh"]
-
-COPY ["entrypoint.sh", "/srv/entrypoint.sh"]
-
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install \
@@ -17,6 +11,7 @@ RUN apt-get update && \
         ganglia-nagios-bridge \
 #        gosa-plugin-nagios \
 #        gosa-plugin-nagios-schema \
+        inotify-hookable \
         libnagios-object-perl \
         libnagios-plugin-perl \
         nagios-images \
@@ -42,7 +37,7 @@ RUN apt-get update && \
         python-nagiosplugin \
         python3-nagiosplugin
 
-RUN htpasswd -bc /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
+RUN htpasswd -bc /etc/nagios3/htpasswd.users nagiosadmin nagiosadmin
 
 # Backup initial /etc/nagios3/
 RUN mkdir /etc/nagios3bck && \
@@ -54,8 +49,14 @@ RUN mkdir /etc/nagios3bck && \
 
 VOLUME /etc/nagios3
 
-CMD /srv/cmd.sh
+COPY ["setup.sh", "/srv/setup.sh"]
 
-#ENTRYPOINT ["/srv/entrypoint.sh"]
+COPY ["cmd.sh", "/srv/cmd.sh"]
+
+COPY ["entrypoint.sh", "/srv/entrypoint.sh"]
+
+#CMD /srv/cmd.sh
+
+ENTRYPOINT ["/srv/entrypoint.sh"]
 
 EXPOSE 80
