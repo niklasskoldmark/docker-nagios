@@ -44,9 +44,15 @@ RUN apt-get update && \
 
 RUN htpasswd -bc /usr/local/nagios/etc/htpasswd.users nagiosadmin nagiosadmin
 
+# Backup initial /etc/nagios3/
+RUN mkdir /etc/nagios3bck && \
+    cp -R /etc/nagios3/* /etc/nagios3bck/
+
 #RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y fusiondirectory-plugin-nagios fusiondirectory-plugin-nagios-schema
 
 #RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y gosa gosa-plugin-nagios gosa-plugin-nagios-schema
+
+VOLUME /etc/nagios3
 
 CMD /srv/cmd.sh
 
